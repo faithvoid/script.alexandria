@@ -1,3 +1,6 @@
+# Alexandria - Internet Archive parser / download manager for XBMC by faithvoid
+# Edit "Source #X" to whatever you'd like your source name to be, and rename your modified "default.py" to whatever you'd like, as long as "Source #X" points to that Python file. Then rename this script to default.py.
+
 import xbmc
 import xbmcgui
 import xml.etree.ElementTree as ET
