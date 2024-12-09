@@ -8,6 +8,9 @@ ADDON_NAME = "Alexandria"
 SAVE_PATH = "F:\\Downloads"  # Change this to your desired download location
 COLLECTION_URL = ""  # Replace with your collection URL
 
+MAX_FILENAME_LENGTH = 42
+MAX_PATH_LENGTH = 250
+
 def fetch_collection_metadata():
     # Extract collection ID from the URL
     collection_id = COLLECTION_URL.split("/")[-1]
@@ -20,6 +23,32 @@ def fetch_collection_metadata():
     else:
         xbmcgui.Dialog().ok(ADDON_NAME, "Failed to fetch collection metadata.")
         return None
+
+def truncate_file_name(file_name):
+    # Split the file name into base name and extension
+    base_name, ext = os.path.splitext(file_name)
+    
+    # Ensure the base name fits within the MAX_FILENAME_LENGTH, leaving room for the extension
+    max_base_name_length = MAX_FILENAME_LENGTH - len(ext)
+    if len(base_name) > max_base_name_length:
+        base_name = base_name[:max_base_name_length]
+    
+    return base_name + ext
+
+def get_safe_file_path(file_name):
+    # Ensure the full file path doesn't exceed MAX_PATH_LENGTH
+    truncated_file_name = truncate_file_name(file_name)
+    file_path = os.path.join(SAVE_PATH, truncated_file_name)
+    
+    # If the full path exceeds MAX_PATH_LENGTH, truncate the file name further
+    if len(file_path) > MAX_PATH_LENGTH:
+        available_length = MAX_PATH_LENGTH - len(SAVE_PATH) - 1  # Reserve space for the separator
+        base_name, ext = os.path.splitext(truncated_file_name)
+        base_name = base_name[:available_length]
+        truncated_file_name = base_name + ext
+        file_path = os.path.join(SAVE_PATH, truncated_file_name)
+    
+    return file_path
 
 def download_file(item_url, save_path):
     response = requests.get(item_url, stream=True)
@@ -90,7 +119,9 @@ def main():
     selected_file = files[selected_index]
     file_name = selected_file["name"]
     file_url = "https://archive.org/download/{}/{}".format(metadata["metadata"]["identifier"], file_name)
-    save_path = os.path.join(SAVE_PATH, file_name)
+    
+    # Get a safe file path with truncated name
+    save_path = get_safe_file_path(file_name)
 
     if download_file(file_url, save_path):
         xbmcgui.Dialog().ok(ADDON_NAME, "File downloaded successfully:\n{}".format(save_path))
