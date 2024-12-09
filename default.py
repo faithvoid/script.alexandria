@@ -10,6 +10,7 @@ COLLECTION_URL = ""  # Replace with your collection URL
 
 MAX_FILENAME_LENGTH = 42
 MAX_PATH_LENGTH = 250
+MAX_FILE_SIZE = 4294967296  # 4GB in bytes
 
 def fetch_collection_metadata():
     # Extract collection ID from the URL
@@ -50,7 +51,11 @@ def get_safe_file_path(file_name):
     
     return file_path
 
-def download_file(item_url, save_path):
+def download_file(item_url, save_path, file_size):
+    if file_size > MAX_FILE_SIZE:
+        xbmcgui.Dialog().ok(ADDON_NAME, f"The file is too large to download ({file_size} bytes).")
+        return False
+
     response = requests.get(item_url, stream=True)
     if response.status_code == 200:
         total_size = int(response.headers.get('content-length', 0))
@@ -89,6 +94,11 @@ def download_file(item_url, save_path):
         return False
 
 def unzip_file(file_path, extract_to):
+    file_size = os.path.getsize(file_path)
+    if file_size > MAX_FILE_SIZE:
+        xbmcgui.Dialog().ok(ADDON_NAME, f"The file is too large to unzip ({file_size} bytes).")
+        return False
+    
     try:
         with zipfile.ZipFile(file_path, 'r') as zip_ref:
             zip_ref.extractall(extract_to)
@@ -123,7 +133,13 @@ def main():
     # Get a safe file path with truncated name
     save_path = get_safe_file_path(file_name)
 
-    if download_file(file_url, save_path):
+    # Check file size before downloading
+    file_size = int(selected_file.get("size", 0))  # Assuming "size" is in bytes
+    if file_size > MAX_FILE_SIZE:
+        xbmcgui.Dialog().ok(ADDON_NAME, f"The file '{file_name}' is too large to download ({file_size} bytes).")
+        return
+
+    if download_file(file_url, save_path, file_size):
         xbmcgui.Dialog().ok(ADDON_NAME, "File downloaded successfully:\n{}".format(save_path))
         
         # Check if the file is a .zip and ask if the user wants to unzip
