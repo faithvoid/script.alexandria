@@ -1,5 +1,5 @@
 # script.alexandria
-Internet Archive downloader for XBMC.
+Internet Archive downloader for XBMC. (sources not provided)
 ![1](screenshots/1.bmp)
 ![2](screenshots/2.bmp)
 ![3](screenshots/3.bmp)
