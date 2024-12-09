@@ -4,7 +4,7 @@ import xbmcgui
 import os
 import zipfile
 
-ADDON_NAME = "Internet Archive Downloader"
+ADDON_NAME = "Alexandria"
 SAVE_PATH = "F:\\Downloads"  # Change this to your desired download location
 COLLECTION_URL = ""  # Replace with your collection URL
 
