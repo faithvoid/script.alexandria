@@ -11,3 +11,7 @@ Internet Archive downloader for XBMC.
 - Copy "default.py" to a folder in Q:/scripts (ideally Q:/scripts/Alexandria)
 - Create a "Downloads" folder in F:/
 - Run the script and enjoy!
+
+## Issues:
+- The script will crash if a "Downloads" folder on F (or wherever you've pointed it) isn't present. Will add options to automatically detect and create a directory if unavailable later!
+- You tell me.
