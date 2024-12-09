@@ -16,6 +16,7 @@ Requires the latest version of XBMC from Xbins (as it has crucial TLS/SSL update
 
 ## Issues:
 - The script will crash if a "Downloads" folder on F (or wherever you've pointed it) isn't present. Will add options to automatically detect and create a directory if unavailable later!
+- The script blocks files over 4GB (downloading + individual files stored in .zip files) due to FATX limitations. I could possibly modify the script to download & extract files over 4GB in parts, but the performance penalties may not be worth it compared to using a PC.
 - You tell me.
 
 ## TODO:
