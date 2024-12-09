@@ -1,7 +1,8 @@
 # script.alexandria
 Internet Archive downloader for XBMC. 
 
-(sources not provided)
+Requires the latest version of XBMC from Xbins (as it has crucial TLS/SSL updates that allow this script to work). Sources are NOT provided and must be input manually!
+
 ![1](screenshots/1.bmp)
 ![2](screenshots/2.bmp)
 ![3](screenshots/3.bmp)
