@@ -1,3 +1,5 @@
+# Alexandria - Internet Archive parser / download manager for XBMC by faithvoid
+
 import requests
 import xbmc
 import xbmcgui
