@@ -94,17 +94,20 @@ def download_file(item_url, save_path, file_size):
         return False
 
 def unzip_file(file_path, extract_to):
-    file_size = os.path.getsize(file_path)
-    if file_size > MAX_FILE_SIZE:
-        xbmcgui.Dialog().ok(ADDON_NAME, "The file is too large to unzip ({file_size} bytes).")
-        return False
-    
     try:
         with zipfile.ZipFile(file_path, 'r') as zip_ref:
+            # Check if any individual file inside the ZIP exceeds 4GB
+            for zip_info in zip_ref.infolist():
+                if zip_info.file_size > MAX_FILE_SIZE:
+                    xbmcgui.Dialog().ok(ADDON_NAME, "The file '{zip_info.filename}' inside the ZIP archive is too large to extract ({zip_info.file_size} bytes).")
+                    return False
+            
+            # Extract all files if none exceed 4GB
             zip_ref.extractall(extract_to)
+        
         return True
     except Exception as e:
-        xbmcgui.Dialog().ok(ADDON_NAME, "Error extracting file: {}".format(str(e)))
+        xbmcgui.Dialog().ok(ADDON_NAME, "Error extracting file: {str(e)}")
         return False
 
 def main():
