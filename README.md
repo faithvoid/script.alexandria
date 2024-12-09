@@ -19,3 +19,6 @@ Internet Archive downloader for XBMC.
 
 ## TODO:
 - Possibly add option to mount & launch .ISO files, ROM files and video files directly after downloading(?)
+
+## Disclaimer:
+- The Internet Archive is a vast archive of many files, tons of which are legal to download! Make sure you follow the copyright laws of your region while downloading from Internet Archive sources. Support will not be given for anyone trying to use this utility for blatant piracy. 
