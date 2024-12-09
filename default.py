@@ -53,7 +53,7 @@ def get_safe_file_path(file_name):
 
 def download_file(item_url, save_path, file_size):
     if file_size > MAX_FILE_SIZE:
-        xbmcgui.Dialog().ok(ADDON_NAME, f"The file is too large to download ({file_size} bytes).")
+        xbmcgui.Dialog().ok(ADDON_NAME, "The file is too large to download ({file_size} bytes).")
         return False
 
     response = requests.get(item_url, stream=True)
@@ -96,7 +96,7 @@ def download_file(item_url, save_path, file_size):
 def unzip_file(file_path, extract_to):
     file_size = os.path.getsize(file_path)
     if file_size > MAX_FILE_SIZE:
-        xbmcgui.Dialog().ok(ADDON_NAME, f"The file is too large to unzip ({file_size} bytes).")
+        xbmcgui.Dialog().ok(ADDON_NAME, "The file is too large to unzip ({file_size} bytes).")
         return False
     
     try:
@@ -136,7 +136,7 @@ def main():
     # Check file size before downloading
     file_size = int(selected_file.get("size", 0))  # Assuming "size" is in bytes
     if file_size > MAX_FILE_SIZE:
-        xbmcgui.Dialog().ok(ADDON_NAME, f"The file '{file_name}' is too large to download ({file_size} bytes).")
+        xbmcgui.Dialog().ok(ADDON_NAME, "The file '{file_name}' is too large to download ({file_size} bytes).")
         return
 
     if download_file(file_url, save_path, file_size):
