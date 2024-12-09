@@ -8,7 +8,7 @@ Requires the latest version of XBMC from Xbins (as it has crucial TLS/SSL update
 ![3](screenshots/3.bmp)
 
 ## How To Use:
-- Download latest release file
+- Download latest release file, or "release" folder from the repository.
 - Extract the .zip file, edit "default.py" to point "COLLECTION_URL" to the Internet Archive collection of your choice 
 - Copy the "Alexandria" folder to Q:/scripts
 - Create a "Downloads" folder in your F:/ partition (you can modify where the script saves it's files in default.py)
