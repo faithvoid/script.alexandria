@@ -15,3 +15,6 @@ Internet Archive downloader for XBMC.
 ## Issues:
 - The script will crash if a "Downloads" folder on F (or wherever you've pointed it) isn't present. Will add options to automatically detect and create a directory if unavailable later!
 - You tell me.
+
+## TODO:
+- Possibly add option to mount & launch .ISO files, ROM files and video files directly after downloading(?)
