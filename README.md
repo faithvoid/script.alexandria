@@ -1,4 +1,4 @@
-# script.alexandria
+# Alexandria
 Internet Archive downloader for XBMC. 
 
 Requires the latest version of XBMC from Xbins (as it has crucial TLS/SSL updates that allow this script to work). Sources are NOT provided and must be input manually!
