@@ -11,6 +11,7 @@ Internet Archive downloader for XBMC.
 - Copy "default.py" to a folder in Q:/scripts (ideally Q:/scripts/Alexandria)
 - Create a "Downloads" folder in F:/
 - Run the script and enjoy!
+- (Optional) To make a launcher front-end for multiple sources, modify "launcher.py" with the names of sources that you'd like to add, modify "source1.py / source2.py / source3.py" to point at your Python script of choice (add or remove as many entries as needed), then rename "launcher.py" to "default.py"!
 
 ## Issues:
 - The script will crash if a "Downloads" folder on F (or wherever you've pointed it) isn't present. Will add options to automatically detect and create a directory if unavailable later!
