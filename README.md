@@ -1,5 +1,8 @@
 # script.alexandria
 Internet Archive downloader for XBMC.
+[](/screenshots/1.bmp)
+[](/screenshots/2.bmp)
+[](/screenshots/3.bmp)
 
 ## How To Use:
 - Enter collection URL into the "COLLECTION_URL" part of default.py
