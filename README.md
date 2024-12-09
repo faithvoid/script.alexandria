@@ -1,4 +1,4 @@
-# script.internetarchive
+# script.alexandria
 Internet Archive downloader for XBMC.
 
 ## How To Use:
