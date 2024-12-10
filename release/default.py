@@ -81,7 +81,7 @@ def download_file(item_url, save_path, file_size):
         
         with open(save_path, "wb") as f:
             downloaded = 0
-            for chunk in response.iter_content(chunk_size=2048*1024):  # Smaller chunks to update UI
+            for chunk in response.iter_content(chunk_size=256*1024):  # Smaller chunks to update UI
                 if chunk:
                     f.write(chunk)
                     downloaded += len(chunk)
