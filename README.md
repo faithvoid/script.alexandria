@@ -18,6 +18,7 @@ Requires the latest version of XBMC from Xbins (as it has crucial TLS/SSL update
 - The script blocks files over 4GB (downloading + individual files stored in .zip files) due to FATX limitations. I could possibly modify the script to download & extract files over 4GB in parts, but the performance penalties may not be worth it compared to using a PC.
 - The script can be kind of slow, especially when compared to FTP. Higher chunk values increase the likelihood of XBMC crashing, so they're set to a small but reasonable value. You can modify this value yourself to attempt to increase performance but YMMV, especially on RAM-limited themes on stock 64MB Xbox consoles (use 2048*1024 at absolute max).
 - Some files with absurdly long file names and multiple special characters (like "4 Game in One - Ice Hockey, Phantom UFO, Spy Vs. Spy, Cosmic Avenger (1983) (Bit Corporation) (PAL).bin") will crash the script. Sanitization function definitely needs a bit of work.
+- File name doesn't display properly on files over 4GB, but the error still works!
 - You tell me.
 
 ## TODO:
