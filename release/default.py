@@ -15,6 +15,15 @@ MAX_FILENAME_LENGTH = 42
 MAX_PATH_LENGTH = 250
 MAX_FILE_SIZE = 4294967296  # 4GB in bytes
 
+def ensure_save_path_exists():
+    """Ensure the SAVE_PATH directory exists, creating it if necessary."""
+    if not os.path.exists(SAVE_PATH):
+        try:
+            os.makedirs(SAVE_PATH)
+        except Exception as e:
+            xbmcgui.Dialog().ok(ADDON_NAME, "Error creating directory: {}".format(SAVE_PATH))
+            raise e
+
 def fetch_collection_metadata():
     # Extract collection ID from the URL
     collection_id = COLLECTION_URL.split("/")[-1]
@@ -72,7 +81,7 @@ def download_file(item_url, save_path, file_size):
         
         with open(save_path, "wb") as f:
             downloaded = 0
-            for chunk in response.iter_content(chunk_size=256*1024):  # Smaller chunks to update UI
+            for chunk in response.iter_content(chunk_size=2048*1024):  # Smaller chunks to update UI
                 if chunk:
                     f.write(chunk)
                     downloaded += len(chunk)
@@ -114,6 +123,9 @@ def unzip_file(file_path, extract_to):
         return False
 
 def main():
+    # Ensure the save path exists
+    ensure_save_path_exists()
+
     # Fetch metadata for the collection
     metadata = fetch_collection_metadata()
     if not metadata:
