@@ -1,18 +1,18 @@
-# Alexandria - Internet Archive parser / download manager for XBMC by faithvoid
-
 import requests
 import xbmc
 import xbmcgui
 import os
 import zipfile
+from urllib import quote
 
-ADDON_NAME = "Alexandria"
+ADDON_NAME = "Alexandria - Public Domain Movies"
 SAVE_PATH = "F:\\Downloads"  # Change this to your desired download location
-COLLECTION_URL = ""  # Replace with your collection URL
+COLLECTION_URL = "https://archive.org/details/mtvs-downtown_202209"  # Replace with your collection URL
 
 MAX_FILENAME_LENGTH = 42
 MAX_PATH_LENGTH = 250
 MAX_FILE_SIZE = 4294967296  # 4GB in bytes
+MEDIA_EXTENSIONS = {".mp4", ".mp3", ".avi", ".mkv", ".wav", ".flac", ".mov"}  # Add more as needed
 
 def ensure_save_path_exists():
     """Ensure the SAVE_PATH directory exists, creating it if necessary."""
@@ -62,9 +62,14 @@ def get_safe_file_path(file_name):
     
     return file_path
 
+def stream_file(file_url):
+    """Play the file using XBMC's built-in player."""
+    encoded_url = quote(file_url, safe=':/')
+    xbmc.Player().play(encoded_url)
+
 def download_file(item_url, save_path, file_size):
     if file_size > MAX_FILE_SIZE:
-        xbmcgui.Dialog().ok(ADDON_NAME, "The file is too large to download ({file_size} bytes).")
+        xbmcgui.Dialog().ok(ADDON_NAME, "The file is too large to download ({} bytes).".format(file_size))
         return False
 
     response = requests.get(item_url, stream=True)
@@ -110,7 +115,7 @@ def unzip_file(file_path, extract_to):
             # Check if any individual file inside the ZIP exceeds 4GB
             for zip_info in zip_ref.infolist():
                 if zip_info.file_size > MAX_FILE_SIZE:
-                    xbmcgui.Dialog().ok(ADDON_NAME, "The file '{zip_info.filename}' inside the ZIP archive is too large to extract ({zip_info.file_size} bytes).")
+                    xbmcgui.Dialog().ok(ADDON_NAME, "The file '{}' inside the ZIP archive is too large to extract ({} bytes).".format(zip_info.filename, zip_info.file_size))
                     return False
             
             # Extract all files if none exceed 4GB
@@ -118,7 +123,7 @@ def unzip_file(file_path, extract_to):
         
         return True
     except Exception as e:
-        xbmcgui.Dialog().ok(ADDON_NAME, "Error extracting file: {str(e)}")
+        xbmcgui.Dialog().ok(ADDON_NAME, "Error extracting file: {}".format(str(e)))
         return False
 
 def main():
@@ -138,22 +143,34 @@ def main():
 
     # Show a selection dialog
     file_names = [file["name"] for file in files if "name" in file]
-    selected_index = xbmcgui.Dialog().select("Select a file to download", file_names)
+    selected_index = xbmcgui.Dialog().select("Select a file", file_names)
     if selected_index == -1:
         return
 
-    # Download the selected file
+    # Process the selected file
     selected_file = files[selected_index]
     file_name = selected_file["name"]
     file_url = "https://archive.org/download/{}/{}".format(metadata["metadata"]["identifier"], file_name)
     
-    # Get a safe file path with truncated name
+    # Check if the file is a media file
+    _, ext = os.path.splitext(file_name)
+    if ext.lower() in MEDIA_EXTENSIONS:
+        stream_choice = xbmcgui.Dialog().yesno(
+            ADDON_NAME,
+            "Would you like to stream this file instead of downloading it?",
+            "File: {}".format(file_name)
+        )
+        if stream_choice:  # User selected "Yes"
+            stream_file(file_url)
+            return
+
+    # Proceed to download the file
     save_path = get_safe_file_path(file_name)
 
     # Check file size before downloading
     file_size = int(selected_file.get("size", 0))  # Assuming "size" is in bytes
     if file_size > MAX_FILE_SIZE:
-        xbmcgui.Dialog().ok(ADDON_NAME, "The file '{file_name}' is too large to download ({file_size} bytes).")
+        xbmcgui.Dialog().ok(ADDON_NAME, "The file '{}' is too large to download ({} bytes).".format(file_name, file_size))
         return
 
     if download_file(file_url, save_path, file_size):
