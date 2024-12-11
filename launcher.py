@@ -9,9 +9,9 @@ import sys
 def main():
     dialog = xbmcgui.Dialog()
     feeds = [
-        ("Source #1", "RunScript(Q:\\scripts\\Alexandria\\source1.py)"),
-        ("Source #2", "RunScript(Q:\\scripts\\Alexandria\\source2.py)"),
-        ("Source #2", "RunScript(Q:\\scripts\\Alexandria\\source3.py)"),
+        ("Source #1 - Public Domain Movies", "RunScript(Q:\\scripts\\Alexandria\\source1.py)"),
+        ("Source #2 - N/A", "RunScript(Q:\\scripts\\Alexandria\\source2.py)"),
+        ("Source #3 - N/A", "RunScript(Q:\\scripts\\Alexandria\\source3.py)"),
         ("Update Alexandria", "RunScript(Q:\\scripts\\Alexandria\\update.py)"),
     ]
     
