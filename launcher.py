@@ -12,6 +12,7 @@ def main():
         ("Source #1", "RunScript(Q:\\scripts\\Alexandria\\source1.py)"),
         ("Source #2", "RunScript(Q:\\scripts\\Alexandria\\source2.py)"),
         ("Source #2", "RunScript(Q:\\scripts\\Alexandria\\source3.py)"),
+        ("Update Alexandria", "RunScript(Q:\\scripts\\Alexandria\\update.py)"),
     ]
     
     feed_list = [name for name, _ in feeds]
