@@ -12,7 +12,7 @@ COLLECTION_URL = ""  # Replace with your collection URL
 MAX_FILENAME_LENGTH = 42
 MAX_PATH_LENGTH = 250
 MAX_FILE_SIZE = 4294967296  # 4GB in bytes
-MEDIA_EXTENSIONS = {".mp4", ".mp3", ".avi", ".mkv", ".wav", ".flac", ".mov"}  # Add more as needed
+MEDIA_EXTENSIONS = {".mp2", ".mp3", ".mp4", ".avi", ".mkv", ".wav", ".flac", ".mov", ".mpg", ".mpeg", ".wmv", ".ogg", ".ogv", ".3gp", ".m4a", ".m3u"}  # Add more as needed
 
 def ensure_save_path_exists():
     """Ensure the SAVE_PATH directory exists, creating it if necessary."""
