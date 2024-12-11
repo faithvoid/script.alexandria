@@ -5,9 +5,9 @@ import os
 import zipfile
 from urllib import quote
 
-ADDON_NAME = "Alexandria - Public Domain Movies"
+ADDON_NAME = "Alexandria"
 SAVE_PATH = "F:\\Downloads"  # Change this to your desired download location
-COLLECTION_URL = "https://archive.org/details/mtvs-downtown_202209"  # Replace with your collection URL
+COLLECTION_URL = ""  # Replace with your collection URL
 
 MAX_FILENAME_LENGTH = 42
 MAX_PATH_LENGTH = 250
