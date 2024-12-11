@@ -22,7 +22,7 @@ Requires the latest version of XBMC from Xbins (as it has crucial TLS/SSL update
 - You tell me.
 
 ## TODO:
-- Possibly add option to mount & launch .ISO files, ROM files and video files directly after downloading(?)
+- Possibly add option to mount & launch .ISO files, ROM files and media files directly after downloading.
 - Implement better filename sanitization
 - Implement scanning from multiple collections at the same time.
 - Implement some sort of login system so access-locked files can be downloaded.
