@@ -1,6 +1,8 @@
 # Alexandria
 Internet Archive downloader for XBMC. 
 
+**This has essentially been replaced by ![Medusa](https://github.com/faithvoid/plugin.video.medusa), which has way more features! Go download that add-on instead, it can download files just as well as Alexandria, AND stream things twice as well!**
+
 ![Icon](release/default.tbn)
 
 Requires the latest version of XBMC (3.6-DEV-r33046 or later) from Xbins (as it has crucial TLS/SSL updates that allow this script to work). Sources are NOT provided and must be input manually!
